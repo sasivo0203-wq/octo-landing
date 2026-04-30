@@ -47,47 +47,144 @@
         .nav-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.88rem; font-weight: 400; transition: color .2s; }
         .nav-links a:hover { color: white; }
         .nav-cta { background: var(--coral) !important; color: white !important; padding: 0.5rem 1.3rem; border-radius: 50px; font-weight: 600 !important; transition: background .2s, transform .15s !important; }
+        .ham { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .ham span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; }
 
         .hero { min-height: 100vh; background: var(--ink); display: flex; align-items: center; padding: 7rem 2rem 0; position: relative; overflow: hidden; }
         .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; position: relative; z-index: 1; padding-bottom: 10rem; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(61,214,232,0.12); border: 1px solid rgba(61,214,232,0.25); color: var(--aqua); padding: 0.35rem 1rem; border-radius: 50px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.75rem; }
         .hero h1 { font-family: 'Fraunces', serif; font-size: clamp(2.6rem, 5.5vw, 4.6rem); font-weight: 900; line-height: 1.08; color: white; margin-bottom: 1.5rem; }
         .hero h1 em { font-style: italic; color: var(--aqua); }
         .hero h1 .coral { color: var(--coral); font-style: normal; }
         .hero-sub { font-size: clamp(1rem, 2vw, 1.18rem); color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.75; max-width: 520px; margin-bottom: 2.5rem; }
-        
+        .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
         .btn-primary { background: var(--coral); color: white; padding: .95rem 2.2rem; border-radius: 50px; font-weight: 600; font-size: .97rem; text-decoration: none; box-shadow: 0 8px 24px rgba(232,82,42,.4); transition: all .2s; }
         .btn-primary:hover { background: var(--coral-lt); transform: translateY(-2px); }
+        .btn-ghost { border: 1px solid rgba(255,255,255,.22); color: white; padding: .95rem 2rem; border-radius: 50px; font-size: .97rem; text-decoration: none; transition: all .2s; }
+        .btn-ghost:hover { background: rgba(255,255,255,.08); }
+
+        section { padding: 6rem 2rem; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .stitle { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 4vw, 2.9rem); font-weight: 700; color: var(--ink); margin-bottom: 1rem; }
+        
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+        .step { background: white; border-radius: 22px; padding: 2rem; transition: transform .25s; }
+        .step:hover { transform: translateY(-5px); }
+        .step-n { font-family: 'Fraunces', serif; font-size: 3rem; font-weight: 900; color: var(--sand); line-height: 1; margin-bottom: 1rem; }
+
+        #pricing { background: var(--sand); }
+        .pg { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .pc { background: white; border-radius: 24px; padding: 2.5rem; transition: all .25s; }
+        .pc:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .pc-price { font-family: 'Fraunces', serif; font-size: 3rem; font-weight: 900; margin: 1rem 0; }
+
+        footer { background: #040c16; padding: 3rem 2rem; color: rgba(255,255,255,0.3); text-align: center; }
 
         @media(max-width:900px) {
             .hero-inner { grid-template-columns: 1fr; text-align: center; }
+            .hero-sub { margin: 0 auto 2.5rem; }
+            .hero-ctas { justify-content: center; }
             .nav-links { display: none; }
+            .ham { display: flex; }
         }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="#" class="logo-mark">
-        <div class="logo-top"><span class="oc">Oc</span>to</div>
-        <div class="logo-bottom">Concierge</div>
-    </a>
-    <ul class="nav-links">
-        <li><a href="#come-funziona">Come funziona</a></li>
-        <li><a href="#braccia">Funzionalità</a></li>
-        <li><a href="#pricing">Prezzi</a></li>
-        <li><a href="#cta" class="nav-cta">Richiedi demo</a></li>
-    </ul>
+  <a href="#" class="logo-mark">
+    <div class="logo-top"><span class="oc">Oc</span>to</div>
+    <div class="logo-bottom">Concierge</div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#come-funziona">Come funziona</a></li>
+    <li><a href="#braccia">Funzionalità</a></li>
+    <li><a href="#pricing">Prezzi</a></li>
+    <li><a href="#cta" class="nav-cta">Richiedi demo</a></li>
+  </ul>
+  <div class="ham" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
 
 <section class="hero">
-    <div class="hero-inner">
-        <div class="hero-text">
-            <h1>Otto braccia.<br><em>Un solo</em> sistema.<br><span class="coral">Ordini perfetti.</span></h1>
-            <p class="hero-sub">I tuoi clienti scansionano il QR, scrivono su WhatsApp e tu ricevi tutto su Telegram — organizzato, numerato, pronto. Zero caos. Zero file. Zero app.</p>
-            <a href="#cta" class="btn-primary">Richiedi una demo gratuita</a>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">⛱️ Per stabilimenti balneari italiani</div>
+      <h1>Otto braccia.<br><em>Un solo</em> sistema.<br><span class="coral">Ordini perfetti.</span></h1>
+      <p class="hero-sub">I tuoi clienti scansionano il QR, scrivono su WhatsApp e tu ricevi tutto su Telegram — organizzato, numerato, pronto. Zero caos. Zero file. Zero app.</p>
+      <div class="hero-ctas">
+        <a href="#cta" class="btn-primary">Richiedi una demo gratuita</a>
+        <a href="#come-funziona" class="btn-ghost">Come funziona →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="come-funziona" style="background: var(--sand-lt);">
+    <div class="container">
+        <h2 class="stitle">Semplice come un messaggio</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-n">01</div>
+                <h3>Il cliente scansiona</h3>
+                <p>Un QR code unico per ogni ombrellone o tavolo.</p>
+            </div>
+            <div class="step">
+                <div class="step-n">02</div>
+                <h3>Ordina su WhatsApp</h3>
+                <p>Niente app da scaricare. Usa l'app che ha già.</p>
+            </div>
+            <div class="step">
+                <div class="step-n">03</div>
+                <h3>Ricevi su Telegram</h3>
+                <p>Lo staff riceve l'ordine con numero ombrellone e dettagli.</p>
+            </div>
+            <div class="step">
+                <div class="step-n">04</div>
+                <h3>Servizio rapido</h3>
+                <p>Consegna immediata e zero errori di comunicazione.</p>
+            </div>
         </div>
     </div>
 </section>
+
+<section id="pricing">
+    <div class="container">
+        <h2 class="stitle" style="text-align: center;">Piani trasparenti</h2>
+        <div class="pg">
+            <div class="pc">
+                <h3>Base</h3>
+                <div class="pc-price">€49<span>/mese</span></div>
+                <p>Per piccoli stabilimenti</p>
+                <a href="#cta" class="btn-primary" style="display: block; text-align: center;">Scegli Base</a>
+            </div>
+            <div class="pc" style="border: 2px solid var(--ocean);">
+                <h3>Pro</h3>
+                <div class="pc-price">€89<span>/mese</span></div>
+                <p>Ideale per lidi con ristorante</p>
+                <a href="#cta" class="btn-primary" style="display: block; text-align: center;">Scegli Pro</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="cta" style="background: var(--ink); color: white; text-align: center;">
+    <div class="container">
+      <h2 class="stitle" style="color: white;">Pronto a digitalizzare il tuo lido?</h2>
+      <p style="margin-bottom: 2rem; opacity: 0.7;">Contattaci oggi per una prova gratuita di 14 giorni.</p>
+      <a href="https://wa.me/tuonumero" class="btn-primary">Parlaci su WhatsApp</a>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 OctoConcierge. Tutti i diritti riservati.</p>
+</footer>
+
+<script>
+    function toggleMenu() {
+        const nav = document.getElementById('navLinks');
+        nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+    }
+</script>
 
 </body>
 </html>
